@@ -4,7 +4,7 @@ import { Loader2, RefreshCw } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { BottomNav } from '@/components/layout/BottomNav';
 import { BetCard } from '@/components/bet/BetCard';
-import { CreateBetModal } from '@/components/bet/CreateBetModal';
+import { GameSelectorSheet } from '@/components/bet/GameSelectorSheet';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { Bet, Profile } from '@/types/database';
@@ -18,7 +18,7 @@ export default function Arena() {
   const [bets, setBets] = useState<BetWithCreator[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [gameSelectorOpen, setGameSelectorOpen] = useState(false);
   const [acceptingBetId, setAcceptingBetId] = useState<string | null>(null);
 
   const fetchBets = async () => {
@@ -178,11 +178,11 @@ export default function Arena() {
         )}
       </main>
 
-      <BottomNav onCreateBet={() => setCreateModalOpen(true)} />
+      <BottomNav onCreateBet={() => setGameSelectorOpen(true)} />
       
-      <CreateBetModal
-        open={createModalOpen}
-        onOpenChange={setCreateModalOpen}
+      <GameSelectorSheet
+        open={gameSelectorOpen}
+        onOpenChange={setGameSelectorOpen}
         onBetCreated={fetchBets}
       />
     </div>
